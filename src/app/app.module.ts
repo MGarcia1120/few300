@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,7 +13,11 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import { ActionsComponent } from './components/actions/actions.component';
 import { InboxComponent } from './components/inbox/inbox.component';
 import { TodoEntryComponent } from './components/todo-entry/todo-entry.component';
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducers } from './reducers';
+import { ListComponent } from './components/list/list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,16 +27,18 @@ import { ReactiveFormsModule } from "@angular/forms";
     ProjectsComponent,
     ActionsComponent,
     InboxComponent,
-    TodoEntryComponent
+    TodoEntryComponent,
+    ListComponent
   ],
   imports: [
+    ...MaterialModules,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     LayoutModule,
     ReactiveFormsModule,
-    //Array Spread Operator
-    ...MaterialModules
+    StoreModule.forRoot(reducers),
+    StoreDevtoolsModule.instrument()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
 import { isNgTemplate } from '@angular/compiler';
 import { createAction, props } from '@ngrx/store';
 import { TodoCreate } from '../models';
+import { TodoEntity } from '../reducers/todos.reducer';
 
 let fakeId = 1;
 // "Initiator"
@@ -12,7 +13,7 @@ export const todoItemAdded = createAction(
         payload: {
             ...item,
             id: 'T' + fakeId++
-        }
+        } as TodoEntity
     })
 );
 
