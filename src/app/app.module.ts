@@ -3,14 +3,36 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavComponent } from './components/nav/nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MaterialModules } from './material-stuff';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ForecastComponent } from './components/forecast/forecast.component';
+import { ProjectsComponent } from './components/projects/projects.component';
+import { ActionsComponent } from './components/actions/actions.component';
+import { InboxComponent } from './components/inbox/inbox.component';
+import { TodoEntryComponent } from './components/todo-entry/todo-entry.component';
+import { ReactiveFormsModule } from "@angular/forms";
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavComponent,
+    DashboardComponent,
+    ForecastComponent,
+    ProjectsComponent,
+    ActionsComponent,
+    InboxComponent,
+    TodoEntryComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    LayoutModule,
+    ReactiveFormsModule,
+    //Array Spread Operator
+    ...MaterialModules
   ],
   providers: [],
   bootstrap: [AppComponent]
