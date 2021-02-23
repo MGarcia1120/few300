@@ -11,19 +11,21 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 export const MaterialModules: any[] = [
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatCardModule,
-    MatChipsModule,
-    MatBottomSheetModule,
-    MatFormFieldModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatInputModule,
-    MatSelectModule
+  MatToolbarModule,
+  MatButtonModule,
+  MatSidenavModule,
+  MatIconModule,
+  MatListModule,
+  MatCardModule,
+  MatChipsModule,
+  MatBottomSheetModule,
+  MatFormFieldModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatInputModule,
+  MatSelectModule,
+  MatDialogModule
 ];

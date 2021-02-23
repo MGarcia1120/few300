@@ -1,4 +1,4 @@
-import { isNgTemplate } from '@angular/compiler';
+
 import { createAction, props } from '@ngrx/store';
 import { TodoCreate } from '../models';
 import { TodoEntity } from '../reducers/todos.reducer';
@@ -8,16 +8,25 @@ let fakeId = 1;
 // name, dueDate?, project?
 
 export const todoItemAdded = createAction(
-    '[app] todo item added',
-    ({ item }: { item: TodoCreate }) => ({
-        payload: {
-            ...item,
-            id: 'T' + fakeId++
-        } as TodoEntity
-    })
+  '[app] todo item added',
+  ({ item }: { item: TodoCreate }) => ({
+    payload: {
+      ...item,
+      completed: false,
+      id: 'T' + fakeId++
+    } as TodoEntity
+  })
 );
 
+export const todoItemMarkedComplete = createAction(
+  '[app] todo item marked completed',
+  props<{ item: TodoEntity }>()
+);
 
+export const todoItemMarkedIncomplete = createAction(
+  '[app] todo item marked incomplete',
+  props<{ item: TodoEntity }>()
+);
 
 // "Happy Path"
 // -> after going to the API, dispatch an action that says "Hey, you know that one with the fake id of Txx?"
