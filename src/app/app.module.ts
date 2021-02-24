@@ -19,8 +19,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './reducers';
 import { ListComponent } from './components/list/list.component';
 import { LoginComponent } from './components/login/login.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthEffects } from './effects/auth.effects';
+import { AuthGuard } from './services/auth.guard';
+import { AuthInterceptor } from './services/auth.interceptor';
+import { TodosDataService } from './services/todos-data.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +49,12 @@ import { AuthEffects } from './effects/auth.effects';
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([AuthEffects])
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    TodosDataService, {
+      provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

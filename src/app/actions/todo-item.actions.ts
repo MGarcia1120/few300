@@ -1,4 +1,3 @@
-
 import { createAction, props } from '@ngrx/store';
 import { TodoCreate } from '../models';
 import { TodoEntity } from '../reducers/todos.reducer';
@@ -28,10 +27,17 @@ export const todoItemMarkedIncomplete = createAction(
   props<{ item: TodoEntity }>()
 );
 
-// "Happy Path"
-// -> after going to the API, dispatch an action that says "Hey, you know that one with the fake id of Txx?"
-//    replace it with this real one from the server.
+// initiator
+export const loadTodos = createAction(
+  '[app] load todos'
+);
 
-// "Errors"
-// -> after going to the API, I got an error. Admit your lie. Remove that sucker from the state. And maybe
-//    tell the user about it.
+export const loadTodosSucceeded = createAction(
+  '[app] loading todos succeeded',
+  props<{ payload: TodoEntity[] }>()
+);
+
+export const loadTodosFailed = createAction(
+  '[app] loading todos failed',
+  props<{ errorMessage: string }>()
+);
