@@ -28,7 +28,8 @@ const reducerFunction = createReducer(
         completed: !action.item.completed
       }
     }, state)
-  )
+  ),
+  on(actions.loadTodosSucceeded, (state, action) => adapter.setAll(action.payload, state))
 );
 
 export function reducer(state: TodosState = initialState, action: Action): TodosState {

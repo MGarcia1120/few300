@@ -34,6 +34,38 @@ export class AuthEffects {
     ), { dispatch: true }
   );
 
+  loginSucceededSaveToken$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(authActions.loginSucceeded),
+      tap(a => {
+        localStorage.setItem('token', a.token);
+        const tokenData = JSON.parse(atob(a.token.split('.')[1])) as { exp: number, username: string };
+        const date = new Date();
+        date.setUTCSeconds(tokenData.exp);
+        localStorage.setItem('token-expire', JSON.stringify(date));
+        localStorage.setItem('username', tokenData.username);
+      })
+    ),
+    { dispatch: false }
+  );
+
+
+  logout$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(authActions.logOutRequested),
+      tap(() => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('token-expire');
+        localStorage.removeItem('username');
+      })
+    ),
+    { dispatch: false }
+  );
+
+
+  logOutSendsToLogin$;
+
+
   constructor(
     private actions$: Actions,
     private client: HttpClient,

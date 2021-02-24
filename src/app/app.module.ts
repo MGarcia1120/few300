@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { EffectsModule } from '@ngrx/effects';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,11 +19,13 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './reducers';
 import { ListComponent } from './components/list/list.component';
 import { LoginComponent } from './components/login/login.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthEffects } from './effects/auth.effects';
 import { AuthGuard } from './services/auth.guard';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './effects/auth.effects';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { TodosDataService } from './services/todos-data.service';
+import { TodosEffects } from './effects/todos.effects';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,11 +49,12 @@ import { TodosDataService } from './services/todos-data.service';
     ReactiveFormsModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument(),
-    EffectsModule.forRoot([AuthEffects])
+    EffectsModule.forRoot([AuthEffects, TodosEffects])
   ],
   providers: [
     AuthGuard,
-    TodosDataService, {
+    TodosDataService,
+    {
       provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
     }
   ],
